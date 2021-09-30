@@ -8,7 +8,7 @@ const Image = (props) => {
         src : src,
         size : size
     }
-
+    
     if(shape === 'circle'){
         return (
             <ImageCircle {...styles}></ImageCircle>
@@ -39,7 +39,7 @@ const Image = (props) => {
 }
 
 Image.defaultProps = {
-    shape : 'rectangle',
+    shape : 'circle',
     src : 'https://media.vlpt.us/images/wswj9608/profile/4d70b800-84e2-4ced-ad7d-f71413a6f5a7/KakaoTalk_20210918_153459873.jpg?w=240',
     size : 40,
 }
@@ -63,7 +63,7 @@ const ImageCircle = styled.div`
     height: var(--size);
     border-radius: var(--size);
 
-    background-image: url('${(props) => props.logo_src}');
+    background-image: url('${(props) => props.src}');
     background-size: cover;
     margin: 4px;
 `;
