@@ -7,15 +7,16 @@ import {Grid, Text, Button, Input } from '../elements/index'
 //Cookie
 import { getCookie, setCookie, deleteCookie } from "../shared/cookie";
 
+import { useDispatch } from "react-redux";
+import {actionCreators as userActions} from '../redux/modules/user'
 
 const Login = (props) => {
+    const dispatch = useDispatch();
     const id_in = useRef(null);
     const pw_in = useRef(null);
 
     const login = () => {
-        setCookie('user_id', `${id_in.current.value}`, 3)
-        setCookie('user_pw', `${pw_in.current.value}`, 3)
-        console.log(getCookie('user_id'))
+        dispatch(userActions.loginAction({user_name : 'wooseok'}))
     };
     const addCookie = () => {
 
@@ -48,9 +49,7 @@ const Login = (props) => {
             </Grid>
             <Grid padding = '16px'>
                 {/* <Button _onClick = {login}>{props.btn_text}</Button> */}
-                <Button _onClick = {()=>{
-                    deleteCookie('user_pw')
-                }}>{props.btn_text}</Button>
+                <Button _onClick = {login}>{props.btn_text}</Button>
             </Grid>
         </React.Fragment>
     );
