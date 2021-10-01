@@ -25,8 +25,8 @@ const Header = (props) => {
         <React.Fragment>
             <Grid is_flex bg ={props.bg} margin = '0px 0px 16px 0px'>
                 <Image shape = 'logo' src = {props.src}/>
-                <Button shape = 'short' >회원가입</Button>
-                <Button shape = 'short' >로그인</Button>
+                <Button shape = 'short' _onClick = {() => {console.log('회원가입 눌러썽')}} >회원가입</Button>
+                <Button shape = 'short' _onClick = {() => {console.log('로그인 눌러썽')}}>로그인</Button>
             </Grid>
         </React.Fragment>
     );

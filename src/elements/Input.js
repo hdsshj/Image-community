@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const {width, height, textarea, place, type, children} = props;
+    const {width, height, textarea, place, type, children, _ref} = props;
 
     const styles = {
         width: width,
@@ -20,13 +20,14 @@ const Input = (props) => {
     return (
         <React.Fragment>
             <label>{children}</label>
-            <Box label = '아이디' {...styles} type = {type} placeholder = {place}/>
+            <Box {...styles} ref = {_ref} type = {type} placeholder = {place}/>
         </React.Fragment>
     );
 };
 
 Input.defaultProps = {
     children : null,
+    _ref : null,
     textarea : false,
     type : 'text',
     place : null,

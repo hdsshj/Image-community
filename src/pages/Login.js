@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "../shared/Header";
 
+//최소단위 컴포넌트
 import {Grid, Text, Button, Input } from '../elements/index'
 
+//Cookie
+import { getCookie, setCookie, deleteCookie } from "../shared/cookie";
+
+
 const Login = (props) => {
+    const id_in = useRef(null);
+    const pw_in = useRef(null);
+
+    const login = () => {
+        setCookie('user_id', `${id_in.current.value}`, 3)
+        setCookie('user_pw', `${pw_in.current.value}`, 3)
+        console.log(getCookie('user_id'))
+    };
+    const addCookie = () => {
+
+        let date = new Date();
+        
+        console.log(date)
+        let endDate = new Date((date.getTime() + ((1000*60*60*24)*3))).toUTCString()
+        console.log(endDate)
+        
+        document.cookie = `user_id = ${id_in.current.value}; expires =`+ endDate
+        document.cookie = `user_pw = ${pw_in.current.value}; expires =`+ endDate
+
+
+
+        // console.log(pw_in.current.value, id_in.current.value)
+    };
+
     return (
         <React.Fragment>
 
@@ -12,13 +41,16 @@ const Login = (props) => {
                 <Text subject bold size = '40px'>로그인</Text>
             </Grid>
             <Grid padding = '16px'>
-                <Input place = {props.id_place}>{props.id_label}</Input>
+                <Input _ref = {id_in} place = {props.id_place}>{props.id_label}</Input>
             </Grid>
             <Grid padding = '16px'>
-            <Input type = 'password' place = {props.pw_place}>{props.pw_label}</Input>
+            <Input _ref = {pw_in} type = 'password' place = {props.pw_place}>{props.pw_label}</Input>
             </Grid>
             <Grid padding = '16px'>
-                <Button>{props.btn_text}</Button>
+                {/* <Button _onClick = {login}>{props.btn_text}</Button> */}
+                <Button _onClick = {()=>{
+                    deleteCookie('user_pw')
+                }}>{props.btn_text}</Button>
             </Grid>
         </React.Fragment>
     );

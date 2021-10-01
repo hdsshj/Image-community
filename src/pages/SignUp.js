@@ -17,13 +17,13 @@ const SignUp = (props) => {
                 <Input place = {props.nick_place}>{props.nick_label}</Input>
             </Grid>
             <Grid padding = '16px 16px 0px 16px'>
-                <Input place = {props.pw_place}>{props.pw_label}</Input>
+                <Input id = 'pw1' type = 'password' place = {props.pw_place}>{props.pw_label}</Input>
             </Grid>
             <Grid padding = '16px 16px 0px 16px'>
-                <Input place = {props.re_pw_place}>{props.re_pw_label}</Input>
+                <Input type = 'password' place = {props.re_pw_place}>{props.re_pw_label}</Input>
             </Grid>
             <Grid padding = '16px'>
-                <Button>{props.btn_text}</Button>
+                <Button _onClick = {() => {console.log('!!')}}>{props.btn_text}</Button>
             </Grid>
         </React.Fragment>
     );

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-    const {children, height, shape} = props;
+    const {children, height, shape, _onClick} = props;
 
     const styles = {
         height:height
@@ -10,7 +10,7 @@ const Button = (props) => {
     if (shape === 'short'){
         return (
             <React.Fragment>
-                <ShortBtn {...styles}>{children}</ShortBtn>
+                <ShortBtn onClick = {_onClick} {...styles}>{children}</ShortBtn>
             </React.Fragment>
         );
     }
@@ -18,7 +18,7 @@ const Button = (props) => {
     if (shape === 'full'){
         return (
             <React.Fragment>
-                <Btn {...styles}>{children}</Btn>
+                <Btn onClick = {_onClick} {...styles}>{children}</Btn>
             </React.Fragment>
         );
     }
@@ -33,7 +33,8 @@ const Button = (props) => {
 Button.defaultProps = {
     children : null,
     shape : 'full',
-    height : '50px'
+    height : '50px',
+    _onClick: () => {},
 }
 
 const ShortBtn = styled.button`
