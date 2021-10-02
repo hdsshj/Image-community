@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-    const {children, height, shape, _onClick} = props;
+    const {children, height, short, _onClick, is_float, crud} = props;
 
     const styles = {
         height:height
     }
-    if (shape === 'short'){
+    if (short){
         return (
             <React.Fragment>
                 <ShortBtn onClick = {_onClick} {...styles}>{children}</ShortBtn>
@@ -15,26 +15,43 @@ const Button = (props) => {
         );
     }
     
-    if (shape === 'full'){
+    if (is_float){
+        return (
+            <React.Fragment>
+                <FloatBtn onClick = {_onClick} {...styles}>{children}</FloatBtn>
+            </React.Fragment>
+        );
+    }
+
+    if (crud){
+      return (
+            <React.Fragment>
+                <MyBtn onClick = {_onClick} {...styles}>{children}</MyBtn>
+            </React.Fragment>
+        );  
+    }
+
+    
+    
         return (
             <React.Fragment>
                 <Btn onClick = {_onClick} {...styles}>{children}</Btn>
             </React.Fragment>
         );
-    }
+   
+    
 
 
-    return (
-        <React.Fragment>
-        </React.Fragment>
-    );
+  
 }
 
 Button.defaultProps = {
     children : null,
-    shape : 'full',
+    short : false,
     height : '50px',
     _onClick: () => {},
+    is_float : false,
+    crud : false
 }
 
 const ShortBtn = styled.button`
@@ -57,6 +74,29 @@ const Btn = styled.button`
     margin-top: 28px;
     
     height:${(props) => props.height};
+`;
+
+const MyBtn = styled.button`
+    width: 10%;
+    height: 30px;
+    box-sizing: border-box;
+
+`;
+
+const FloatBtn = styled.button`
+    width: 50px;
+    height: 50px;
+    background-color: #212121;
+    color: #FFF;
+    border : none;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 0px;
+    font-size: 36px;
+    font-weight: 800;
+    position: fixed;
+    bottom: 50px;
+    right: 16px;
 `;
 
 export default Button;

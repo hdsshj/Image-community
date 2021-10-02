@@ -2,7 +2,8 @@
 import React from "react";
 
 import Post from "../components/Post";
-import { Grid, Header } from "../elements";
+import { Grid } from "../elements";
+import Header from "../shared/Header";
 
 const PostList = (props) => {
 

@@ -22,7 +22,7 @@ const P = styled.p`
     color: ${(props) => props.color };
     font-size: ${(props) => props.size};
     font-weight: ${(props) => props.bold ? 600 : 400};
-    ${(props) => props.subject ? 'margin : 40px 0px 0px auto;' : ''};
+    ${(props) => props.subject ? 'margin : 0px 0px 0px auto;' : ''};
 `;
 
 export default Text;

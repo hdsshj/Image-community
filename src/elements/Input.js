@@ -2,16 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const {width, height, textarea, place, type, children, _ref} = props;
+    const {width, height, textarea, place, type, children, _onChange, margin, padding} = props;
 
     const styles = {
         width: width,
         height: height,
+        margin: margin,
+        padding:padding,
     }
 
     if(textarea === true){
         return (
             <React.Fragment>
+                <label>{children}</label>
             <AreaBox {...styles} placeholder = {place}/>
         </React.Fragment>
         );
@@ -20,7 +23,7 @@ const Input = (props) => {
     return (
         <React.Fragment>
             <label>{children}</label>
-            <Box {...styles} ref = {_ref} type = {type} placeholder = {place}/>
+            <Box {...styles} type = {type} placeholder = {place} onChange = {_onChange}/>
         </React.Fragment>
     );
 };
@@ -32,7 +35,10 @@ Input.defaultProps = {
     type : 'text',
     place : null,
     width : '100%',
-    height : '50px'
+    height : '50px',
+    margin : false,
+    padding : false,
+    _onChange : () => {},
 }
 
 const AreaBox = styled.textarea`
@@ -45,6 +51,8 @@ const AreaBox = styled.textarea`
 const Box = styled.input`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
+    margin: ${(props) => props.margin};
+    padding: ${(props) => props.padding};
     box-sizing: border-box;
 `;
 
