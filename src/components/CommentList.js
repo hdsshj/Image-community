@@ -1,60 +1,66 @@
 import React from "react";
-import styled from "styled-components";
-import {useSelector} from 'react-redux'
+import {Grid, Image, Text} from "../elements";
 
-import { Image, Text, Button, Grid } from "../elements/index";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const CommentList = (props) => {
-    const user_name = useSelector((state) => state.user.user? state.user.user.user_name : '')
-    console.log(props.comment_list,user_name)
+  const dispatch = useDispatch();
+  const comment_list = useSelector((state) => state.comment.list)
+
+  const {post_id} = props;
+
+  React.useEffect(() => {
+
+    if(!comment_list[post_id]){
+      dispatch(commentActions.getCommentFB(post_id))
+    }
+  }, [])
+
+  if(!comment_list[post_id] || !post_id){
+    return null;
+  }
+
   return (
     <React.Fragment>
-      {props.comment_list.map((l, i) => {
-          if(props.comment_list[i].user_name === user_name){
-            return (
-            
-                <Grid key={i} is_flex>
-                  <Image />
-                  <Text>{l.user_name}</Text>
-                  <Text>{l.comment}</Text>
-                  <Button crud>삭제</Button>
-                </Grid>
-              );
-          }
-        return (
-            
-          <Grid key={i} is_flex>
-            <Image />
-            <Text>{l.user_name}</Text>
-            <Text>{l.comment}</Text>
-          </Grid>
-        );
-      })}
+      <Grid padding="16px">
+        {comment_list[post_id].map(l => {
+          return <CommentItem key = {l.id} {...l} />
+        })}
+      </Grid>
     </React.Fragment>
   );
 };
 
 CommentList.defaultProps = {
-  comment_list: [
-    {
-      user_profile: "",
-      user_name: "wooseok",
-      comment: "와 너무 예뻐요",
-    },
-    {
-      user_profile: "",
-      user_name: "nick",
-      comment: "와 너무 멋져요",
-    },
-    {
-      user_profile: "",
-      user_name: "n2br",
-      comment: "까악",
-    },
-  ],
-  bg: "#DDD",
-};
+  post_id : null,
+}
 
 export default CommentList;
+
+
+const CommentItem = (props) => {
+
+    const {user_profile, user_name, user_id, post_id, contents, insert_dt} = props;
+    return (
+        <Grid is_flex>
+            <Grid is_flex width="auto">
+                <Image shape="circle"/>
+                <Text bold>{user_name}</Text>
+            </Grid>
+            <Grid is_flex margin="0px 4px">
+                <Text margin="0px">{contents}</Text>
+                <Text margin="0px">{insert_dt}</Text>
+            </Grid>
+        </Grid>
+    )
+}
+
+CommentItem.defaultProps = {
+    user_profile: "",
+    user_name: "mean0",
+    user_id: "",
+    post_id: 1,
+    contents: "귀여운 고양이네요!",
+    insert_dt: '2021-01-01 19:00:00'
+}

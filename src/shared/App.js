@@ -8,11 +8,13 @@ import PostList from '../pages/PostList';
 import SignUp from '../pages/SignUp';
 import PostDetail from '../pages/PostDetail';
 import PostEdit from '../pages/PostEdit';
+import Notice from '../pages/Notice'
+import Search from './Search';
 
-import Header from '../elements';
+import Header from '../shared/Header';
 import { Grid, Button } from '../elements';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 import { apiKey } from './firebase';
@@ -22,6 +24,7 @@ import Permit from './Permit';
 
 function App() {
   const dispatch = useDispatch();
+  const post_id = useSelector((state) => state.post.list)
 
   const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`
   const is_session = sessionStorage.getItem(_session_key) ? true : false
@@ -36,16 +39,22 @@ function App() {
 
   return (
     <React.Fragment>
+      <Grid>
+        <Header /> 
+      </Grid>
       <ConnectedRouter history = {history}>
         
         <Route path = '/' component = {PostList} exact/>
 
-        <Route path = '/signup' component = {SignUp}/>
-        <Route path = '/login' component = {Login}/>
-        <Route path = '/detail' component = {PostDetail}/>
-        <Route path = '/edit' component = {PostEdit}/>
+        <Route path = '/signup' component = {SignUp} exact/>
+        <Route path = '/login' component = {Login} exact/>
+        <Route path = '/detail/:id' component = {PostDetail} exact/>
+        <Route path = '/edit/:id' component = {PostEdit} exact/>
+        <Route path = '/edit' component = {PostEdit} exact/>
+        <Route path = '/notice' component = {Notice}exact/>
+        <Route path = '/search' component = {Search}exact/>
         <Permit>
-          <Button is_float >+</Button>
+          <Button is_float _onClick = {() => {history.push('/edit')}}>+</Button>
         </Permit>
       </ConnectedRouter>
     </React.Fragment>

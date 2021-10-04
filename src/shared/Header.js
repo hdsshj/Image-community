@@ -11,6 +11,7 @@ import { history } from "../redux/configureStore";
 import { apiKey } from "./firebase";
 
 import Permit from "./Permit";
+import NotiBadge from "../components/NotiBadge";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -25,14 +26,18 @@ const Header = (props) => {
       
   //   );
   // }
-if(is_login){
+
+ 
+
+if(is_login && is_session){
   return(
     <Permit>
     <React.Fragment>
         <Grid is_flex bg={props.bg} margin="0px 0px 16px 0px">
-          <Image shape="logo" src={props.src} />
+          <Image _onClick = {() => {history.push('/')}} shape="logo" src={props.src} />
           <Button short>내 정보</Button>
-          <Button short>알림</Button>
+          {/* <Button short _onClick = {()=>{history.push('/notice')}}>알림</Button> */}
+          <NotiBadge _onClick = {()=>{history.push('/notice')}}/>
           <Button
             short
             _onClick={() => {

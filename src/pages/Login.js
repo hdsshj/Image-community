@@ -57,7 +57,6 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <Header />
       <Grid padding="16px" margin="0px">
         <Text subject bold size="40px">
           로그인
@@ -68,6 +67,7 @@ const Login = (props) => {
           _onChange={(e) => {
             setId(e.target.value);
           }}
+          onSubmit={login}
           place={props.id_place}
         >
           {props.id_label}
@@ -78,6 +78,7 @@ const Login = (props) => {
           _onChange={(e) => {
             setPw(e.target.value);
           }}
+          onSubmit={login}
           type="password"
           place={props.pw_place}
         >

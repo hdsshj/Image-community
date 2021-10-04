@@ -32,7 +32,6 @@ const SignUp = (props) => {
 
     return (
         <React.Fragment>
-            <Header/>
             <Grid padding = '16px' margin = '0px'>
                 <Text subject bold size = '40px'>{props.title_text} </Text>
             </Grid>

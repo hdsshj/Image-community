@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-    const {children, height, short, _onClick, is_float, crud} = props;
+    const {children, height, short, _onClick, is_float, crud, padding, width, margin} = props;
 
     const styles = {
-        height:height
+        height:height,
+        padding:padding,
+        width:width,
+        margin:margin
     }
     if (short){
         return (
@@ -51,7 +54,11 @@ Button.defaultProps = {
     height : '50px',
     _onClick: () => {},
     is_float : false,
-    crud : false
+    crud : false,
+    is_me : false,
+    padding : '12px 0px',
+    width : '100%',
+    margin: '10px'
 }
 
 const ShortBtn = styled.button`
@@ -77,10 +84,13 @@ const Btn = styled.button`
 `;
 
 const MyBtn = styled.button`
-    width: 10%;
-    height: 30px;
-    box-sizing: border-box;
-
+    width: ${(props) => props.width};
+    border : 0px;
+    margin: ${(props) => props.margin};
+    background-color: #222831;
+    color: #FFF;
+    height: ${(props) => props.height};
+    border-radius: 4px;
 `;
 
 const FloatBtn = styled.button`
@@ -89,10 +99,10 @@ const FloatBtn = styled.button`
     background-color: #212121;
     color: #FFF;
     border : none;
-    border-radius: 50px;
+    border-radius: 25px;
     box-sizing: border-box;
     padding: 0px;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 800;
     position: fixed;
     bottom: 50px;
